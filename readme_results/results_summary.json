@@ -1,0 +1,32 @@
+{
+  "dataset": "FD001",
+  "n_engines": 50,
+  "total_samples": 9909,
+  "n_features_original": 29,
+  "n_features_engineered": 128,
+  "n_features_final": 123,
+  "train_samples": 6577,
+  "val_samples": 1275,
+  "test_samples": 2057,
+  "failure_rate": 0.15642345342617822,
+  "models": {
+    "random_forest": {
+      "accuracy": 0.9547885269810403,
+      "precision": 0.959665855277293,
+      "recall": 0.9547885269810403,
+      "f1_score": 0.9562205858778792,
+      "training_time_seconds": 1.0771164894104004
+    },
+    "xgboost": {
+      "accuracy": 0.95770539620807,
+      "precision": 0.9619509212148717,
+      "recall": 0.95770539620807,
+      "f1_score": 0.9589535128186977,
+      "training_time_seconds": 2.3753085136413574
+    }
+  },
+  "best_model": {
+    "name": "XGBoost",
+    "f1_score": 0.9589535128186977
+  }
+}

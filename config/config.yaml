@@ -1,0 +1,135 @@
+# Predictive Maintenance Configuration
+
+# Project Settings
+project:
+  name: "predictive-maintenance-iot"
+  version: "1.0.0"
+  seed: 42
+
+# Paths
+paths:
+  data_dir: "data"
+  raw_data_dir: "data/raw"
+  processed_data_dir: "data/processed"
+  models_dir: "models"
+  results_dir: "results"
+  logs_dir: "logs"
+  reports_dir: "reports"
+
+# Data Sources
+data_sources:
+  nasa_cmapss:
+    url: "https://phm-datasets.s3.amazonaws.com/NASA/6.+Turbofan+Engine+Degradation+Simulation+Data+Set.zip"
+    name: "NASA_CMAPSS"
+  kaggle_iot:
+    dataset: "ziya07/iot-integrated-predictive-maintenance-dataset"
+    name: "IoT_Maintenance"
+
+# Data Processing
+preprocessing:
+  window_size: 30
+  stride: 1
+  test_split: 0.2
+  validation_split: 0.1
+  scaler: "standard"  # standard, minmax, robust
+
+  # Feature Engineering
+  statistical_features:
+    - mean
+    - std
+    - min
+    - max
+    - rms
+    - kurtosis
+    - skewness
+
+  # Sensor columns (will be dataset-specific)
+  sensor_columns: []
+
+# Model Configurations
+models:
+  random_forest:
+    n_estimators: 200
+    max_depth: 20
+    min_samples_split: 5
+    min_samples_leaf: 2
+    random_state: 42
+    n_jobs: -1
+
+  xgboost:
+    n_estimators: 200
+    max_depth: 10
+    learning_rate: 0.1
+    subsample: 0.8
+    colsample_bytree: 0.8
+    random_state: 42
+
+  lstm:
+    units: [128, 64]
+    dropout: 0.2
+    recurrent_dropout: 0.2
+    batch_size: 64
+    epochs: 100
+    patience: 15
+    learning_rate: 0.001
+
+  gru:
+    units: [128, 64]
+    dropout: 0.2
+    recurrent_dropout: 0.2
+    batch_size: 64
+    epochs: 100
+    patience: 15
+    learning_rate: 0.001
+
+  cnn_1d:
+    filters: [64, 128, 64]
+    kernel_size: 3
+    pool_size: 2
+    dropout: 0.3
+    batch_size: 64
+    epochs: 100
+    patience: 15
+    learning_rate: 0.001
+
+# Evaluation Metrics
+evaluation:
+  metrics:
+    - accuracy
+    - precision
+    - recall
+    - f1_score
+    - roc_auc
+
+  # Time-to-failure specific metrics
+  ttf_metrics:
+    - mean_absolute_error
+    - root_mean_squared_error
+    - r2_score
+
+  # Early warning thresholds
+  warning_threshold_cycles: 50
+
+# Visualization
+visualization:
+  plot_formats: ["png", "html"]
+  dpi: 300
+  figsize: [12, 8]
+
+  # SHAP settings
+  shap:
+    max_display: 20
+    sample_size: 100
+
+# Logging
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file: "logs/predictive_maintenance.log"
+
+# Streaming Simulation (Optional)
+streaming:
+  enabled: false
+  kafka_broker: "localhost:9092"
+  topic: "sensor_data"
+  api_port: 5000

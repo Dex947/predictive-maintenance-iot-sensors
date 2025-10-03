@@ -1,0 +1,46 @@
+# Core Data Science Libraries
+numpy=>1.26.4
+pandas=>2.2.0
+scikit-learn=>1.4.0
+
+# Deep Learning
+tensorflow=>2.15.0
+keras=>2.15.0
+torch=>2.2.0
+torchvision=>0.17.0
+
+# Machine Learning Models
+xgboost=>2.0.3
+lightgbm=>4.3.0
+
+# Visualization
+matplotlib=>3.8.2
+seaborn=>0.13.2
+plotly=>5.18.0
+
+# Explainability
+shap=>0.44.1
+
+# Data Processing
+scipy=>1.12.0
+statsmodels=>0.14.1
+
+# Utilities
+pyyaml=>6.0.1
+python-dotenv=>1.0.1
+tqdm=>4.66.1
+
+# Logging and Monitoring
+tensorboard=>2.15.1
+
+# API and Streaming (Optional)
+flask=>3.0.1
+kafka-python=>2.0.2
+
+# Testing
+pytest=>8.0.0
+pytest-cov=>4.1.0
+
+# Data Download
+requests=>2.31.0
+kaggle=>1.6.6
