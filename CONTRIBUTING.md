@@ -119,7 +119,7 @@ pytest tests/ -v
 ### 1. Clone and Setup
 
 ```bash
-git clone https://github.com/yourusername/predictive-maintenance-iot.git
+git clone https://github.com/Dex947/predictive-maintenance-iot.git
 cd predictive-maintenance-iot
 ```
 
