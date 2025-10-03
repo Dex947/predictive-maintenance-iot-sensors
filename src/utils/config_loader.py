@@ -31,6 +31,8 @@ def load_config(config_path: str = None) -> Dict[str, Any]:
         # Get project root directory
         current_dir = Path(__file__).parent.parent.parent
         config_path = current_dir / "config" / "config.yaml"
+    else:
+        current_dir = Path(config_path).parent.parent
 
     config_path = Path(config_path)
 
@@ -43,6 +45,9 @@ def load_config(config_path: str = None) -> Dict[str, Any]:
         with open(config_path, 'r') as f:
             config = yaml.safe_load(f)
 
+        # Convert all relative paths to absolute paths based on project root
+        _resolve_paths(config, current_dir)
+
         # Create necessary directories
         _create_directories(config)
 
@@ -52,6 +57,26 @@ def load_config(config_path: str = None) -> Dict[str, Any]:
     except yaml.YAMLError as e:
         logger.error(f"Error parsing configuration file: {e}")
         raise
+
+
+def _resolve_paths(config: Dict[str, Any], project_root: Path) -> None:
+    """
+    Convert all relative paths in config to absolute paths.
+
+    Args:
+        config: Configuration dictionary
+        project_root: Project root directory
+    """
+    paths = config.get('paths', {})
+
+    for key, value in paths.items():
+        if value and isinstance(value, str):
+            # Convert to absolute path if it's relative
+            path = Path(value)
+            if not path.is_absolute():
+                paths[key] = str(project_root / value)
+            else:
+                paths[key] = str(path)
 
 
 def _create_directories(config: Dict[str, Any]) -> None:
