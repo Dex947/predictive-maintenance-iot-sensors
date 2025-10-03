@@ -51,6 +51,8 @@ logs/*
 !logs/.gitkeep
 reports/*
 !reports/.gitkeep
+readme_results/
+create_results_for_readme.py
 
 # IDE
 .vscode/
